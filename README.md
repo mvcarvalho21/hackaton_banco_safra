@@ -1,1 +1,2 @@
-# hackaton_banco_safra
+# Quadro KANBAN: https://trello.com/b/T9QivxDk/hackaton-banco-safra
+
