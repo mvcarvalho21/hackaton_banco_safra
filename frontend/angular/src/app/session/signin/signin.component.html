@@ -13,21 +13,25 @@
             <div fxLayout="column" fxLayoutAlign="space-around">
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="CPF" [formControl]="form.controls['cpf']">
+                  <input matInput placeholder="Insira seu CPF"
+                         mask="000.000.000-00"
+                         [formControl]="form.controls['cpf']">
                 </mat-form-field>
                 <small *ngIf="form.controls['cpf'].hasError('required') && form.controls['cpf'].touched"
                        class="mat-text-warn">CPF é obrigatório.</small>
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Email" [formControl]="form.controls['email']">
+                  <input matInput placeholder="Insira seu endereço de email" [formControl]="form.controls['email']">
                 </mat-form-field>
                 <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched"
                        class="mat-text-warn">Email é obrigatório.</small>
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput type="tel" placeholder="Telefone" [formControl]="form.controls['telefone']">
+                  <input matInput type="tel" placeholder="Insira seu celular com (DDD)"
+                         mask="(00) 00000-0000"
+                         [formControl]="form.controls['telefone']">
                 </mat-form-field>
                 <small *ngIf="form.controls['telefone'].hasError('required') && form.controls['telefone'].touched"
                        class="mat-text-warn">Telefone é obrigatória.</small>

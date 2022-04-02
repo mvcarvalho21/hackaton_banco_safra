@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthenticationService} from "@app/_services/authentication.service";
 import {first} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
+import {CPFValidator} from "@app/_util/validator";
 let md5 = require('md5');
 
 @Component({
@@ -26,9 +27,10 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      cpf: [null, Validators.compose([Validators.required])],
-      email: [null, Validators.compose([Validators.required])],
-      telefone: [null, Validators.compose([Validators.required])]
+      cpf: this.fb.control({value: null, disabled: false},
+          Validators.compose([Validators.required, CPFValidator.isValidCpf()])),
+      email: ["", Validators.compose([Validators.email])],
+      telefone: ["", Validators.compose([])],
     });
 
     // get return url from route parameters or default to '/'
