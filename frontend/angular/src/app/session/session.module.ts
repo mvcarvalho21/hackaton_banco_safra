@@ -16,6 +16,13 @@ import {RouterModule} from "@angular/router";
 import {SessionRoutes} from "./session.routing";
 import {SigninComponent} from "./signin/signin.component";
 import {SignupComponent} from "./signup/signup.component";
+import {NgxMaskModule, IConfig} from 'ngx-mask';
+
+const maskConfigFunction: () => Partial<IConfig> = () => {
+  return {
+    validation: false,
+  };
+};
 
 @NgModule({
   imports: [
@@ -28,7 +35,8 @@ import {SignupComponent} from "./signup/signup.component";
     MatButtonModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(maskConfigFunction),
   ],
   declarations: [
     NotFoundComponent,

@@ -13,7 +13,8 @@
             <div fxLayout="column" fxLayoutAlign="space-around">
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Insira seu CPF"
+                  <input matInput
+                         placeholder="Insira seu CPF"
                          mask="000.000.000-00"
                          [formControl]="form.controls['cpf']">
                 </mat-form-field>
@@ -22,14 +23,18 @@
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Insira seu endereço de email" [formControl]="form.controls['email']">
+                  <input matInput
+                         placeholder="Insira seu endereço de email"
+                         [formControl]="form.controls['email']">
                 </mat-form-field>
                 <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched"
                        class="mat-text-warn">Email é obrigatório.</small>
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput type="tel" placeholder="Insira seu celular com (DDD)"
+                  <input matInput
+                         type="tel"
+                         placeholder="Insira seu celular com (DDD)"
                          mask="(00) 00000-0000"
                          [formControl]="form.controls['telefone']">
                 </mat-form-field>

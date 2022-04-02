@@ -13,21 +13,21 @@ let md5 = require('md5');
   styleUrls: ["./signin.component.scss"]
 })
 export class SigninComponent implements OnInit {
-  public form: FormGroup;
+  form: FormGroup;
   submitted = false;
   returnUrl: string;
   error = '';
 
   constructor(
     translate: TranslateService,
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
-    this.form = this.fb.group({
-      cpf: this.fb.control({value: null, disabled: false},
+    this.form = this.formBuilder.group({
+      cpf: this.formBuilder.control({value: null, disabled: false},
           Validators.compose([Validators.required, CPFValidator.isValidCpf()])),
       email: ["", Validators.compose([Validators.email])],
       telefone: ["", Validators.compose([])],
@@ -48,14 +48,17 @@ export class SigninComponent implements OnInit {
       return;
     }
 
-    this.authenticationService.login(this.f.email.value, md5(this.f.senha.value))
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.error = error;
-        });
+    console.log('ddd', this.f.cpf.value, this.f.email.value, this.f.telefone.value);
+
+
+    // this.authenticationService.login(this.f.email.value, md5(this.f.senha.value))
+    //   .pipe(first())
+    //   .subscribe(
+    //     data => {
+    //       this.router.navigate([this.returnUrl]);
+    //     },
+    //     error => {
+    //       this.error = error;
+    //     });
   }
 }
