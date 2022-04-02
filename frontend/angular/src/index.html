@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Banco Safra</title>
+  <link rel="icon" type="image/x-icon" href="faviconfd.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700|Material+Icons" rel="stylesheet">
+  <style type="text/css">
+    .center-load{
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      top: 50%;
+      left: 50%;
+      right: 50%;
+      align-content: center;
+      align-items: center;
+      alignment: center;
+      transform: translate(0, -50%);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .responsive {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .spinner {
+      position: fixed;
+      z-index: 3000;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 8px solid rgba(0, 0, 0, 0.1);
+      border-left-color: #22a6b3;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      white-space: pre;
+      font-weight: normal;
+      font-size: 24px;
+      letter-spacing: 0.04rem;
+      animation: spin 1000s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading::before {
+      content: '';
+      background-color: #fff;
+    }
+
+    .loading::after {
+      position: fixed;
+      z-index: 3000;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      content: '';
+      text-align: center;
+      white-space: pre;
+      font-weight: normal;
+      font-size: 24px;
+      letter-spacing: 0.04rem;
+      color: #000;
+      opacity: 0.8;
+      animation: animation 1s alternate infinite;
+    }
+
+    .tamanho-img{
+      width: 100px;
+      height: 100px;
+    }
+
+    @keyframes animation {
+      to {
+        opacity: 0.2;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+<app-root>
+  <div class="center-load">
+    <img class="tamanho-img" src="assets/images/atualizacao.gif">
+  </div>
+</app-root>
+</body>
+
+</html>

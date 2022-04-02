@@ -1,0 +1,19 @@
+<mat-toolbar layout="fill" class="fig" *ngIf="isMobile">
+  <span class="fill-space"></span>
+  <a [href]="bancoSafraUrl" target="_blank">
+    <img src="/assets/images/bancosafralogo_small.png" alt="" width="23" height="31"
+         matTooltip="BANCO SAFRA" matTooltipPosition="above">
+  </a>
+  <span class="fill-space"></span>
+</mat-toolbar>
+<mat-toolbar layout="fill" class="fig" *ngIf="!isMobile">
+  <span class="fill-space"></span>
+  <a [href]="bancoSafraUrl" target="_blank">
+    <img src="/assets/images/bancosafralogo.png" alt=""
+         matTooltip="BANCO SAFRA" matTooltipPosition="above">
+  </a>
+  <span class="fill-space"></span>
+</mat-toolbar>
+<mat-list [ngStyle]="{'display':'none'}">
+  <mat-list-item></mat-list-item>
+</mat-list>

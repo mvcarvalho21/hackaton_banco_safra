@@ -1,0 +1,55 @@
+<div class="session mat-indigo">
+  <div class="session-content">
+    <div class="session-wrapper">
+      <mat-card>
+        <mat-card-content>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="text-xs-center pb-1">
+              <img src="assets/images/logo-dark.svg" class="size-image" alt=""/>
+              <p class="mat-text-muted">Criar conta</p>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-around">
+              <div class="pb-1">
+                <mat-form-field style="width: 100%">
+                  <input matInput placeholder="Email" type="email" [formControl]="form.controls['email']">
+                </mat-form-field>
+                <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched"
+                       class="mat-text-warn">Você deve inserir um endereço de email.</small>
+                <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched"
+                       class="mat-text-warn">Você deve inserir um endereço de email válido.</small>
+              </div>
+              <div class="pb-1">
+                <mat-form-field style="width: 100%">
+                  <input matInput type="password" placeholder="Senha" [formControl]="form.controls['senha']">
+                </mat-form-field>
+                <small *ngIf="form.controls['senha'].hasError('required') && form.controls['senha'].touched"
+                       class="mat-text-warn">Você deve inserir a senha.</small>
+              </div>
+              <div class="pb-1">
+                <mat-form-field style="width: 100%">
+                  <input matInput placeholder="Confirmar Senha" [formControl]="form.controls['confirmSenha']"
+                         type="password">
+                </mat-form-field>
+                <small
+                  *ngIf="form.controls['confirmSenha'].hasError('required') && form.controls['confirmSenha'].touched"
+                  class="mat-text-warn">Você deve inserir a senha novamente.</small>
+                <small *ngIf="form.controls['confirmSenha'].errors?.equalTo" class="mat-text-warn">
+                  Senhas diferentes.</small>
+              </div>
+              <!-- <div class="pb-1">-->
+              <!--  <mat-checkbox>I have read and agree to the terms of service.</mat-checkbox>-->
+              <!-- </div>-->
+              <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!form.valid">
+                Criar conta
+              </button>
+            </div>
+            <div class="pt-1 pb-1 text-xs-center">
+              <a [routerLink]="['/session/forgot']">Esqueceu a senha?</a>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a [routerLink]="['/session/login']">Acesse sua conta</a>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
