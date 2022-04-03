@@ -49,3 +49,5 @@ backend/docker
 backend/src/main/resources/crud
 docker/*
 exec-docker/*
+backend/node_modules
+backend/package-lock.json
