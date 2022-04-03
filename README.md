@@ -1,5 +1,8 @@
-### Quadro KANBAN: https://trello.com/b/T9QivxDk/hackaton-banco-safra
+### Gestão do Projeto: https://trello.com/b/T9QivxDk/hackaton-banco-safra
 ### Endereço de Produção: https://safraport.netlify.app/
+### Protótipo: https://marvelapp.com/prototype/ahbhf95
+### Vídeo Pitch: https://www.youtube.com/watch?v=Ko0Xsmr9LbU
+### Slides: [Road_Map_Pitch_Banco_Safra_-_Time_7_-_VF.pdf](https://github.com/danieel-reis/hackaton_banco_safra/files/8405625/Road_Map_Pitch_Banco_Safra_-_Time_7_-_VF.pdf)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -57,8 +60,6 @@ Principais recursos:
 * Uso das melhores tecnologias atuais.
 * Sistemas de autenticação, análise de crédito, e busca de dados do cliente.
 * Inteligência artificial treinada em dezenas de milhares de usuários.
-
-<h3><a href="https://marvelapp.com/prototype/ahbhf95" target="_blank">Visualizar protótipo</h3><br>
 
 ### Construído com
 
