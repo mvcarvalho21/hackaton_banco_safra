@@ -1,6 +1,7 @@
 ### Gestão do Projeto: https://trello.com/b/T9QivxDk/hackaton-banco-safra
 ### Endereço de Produção: https://safraport.netlify.app/
 ### Protótipo: https://marvelapp.com/prototype/ahbhf95
+### Vídeo Pitch: https://www.youtube.com/watch?v=Ko0Xsmr9LbU
 ### Slides: [Road_Map_Pitch_Banco_Safra_-_Time_7_-_VF.pdf](https://github.com/danieel-reis/hackaton_banco_safra/files/8405625/Road_Map_Pitch_Banco_Safra_-_Time_7_-_VF.pdf)
 
 <!-- PROJECT LOGO -->
