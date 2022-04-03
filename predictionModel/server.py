@@ -1,16 +1,8 @@
 import socketserver
 from http.server import BaseHTTPRequestHandler
 import random
-from urllib.parse import parse_qs
-#from cgi import parse_header, parse_multipart
-import cgi
-
-
-def getAiResponse():
-    # return converting to string
-    val = str(random.randint(0, 4))
-    # create json
-    return '{"category":' + val + '}'
+from urllib.parse import parse_qs, urlparse
+from classPrediction import predictValue
 
 class MyHandler(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -19,40 +11,36 @@ class MyHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        if self.path == '/predict':
-            response = bytes(getAiResponse(), "utf-8") #create response
+        print(self.path)
+        # check if first characters are /predict
+        if self.path.startswith('/predict'):
+            fields = parse_qs(urlparse(self.path).query)
 
-            self.send_response(200) #create header
+            # check for field "valor_financ"
+            if ('valor_financ' not in fields):
+                self.send_response(400)
+                self.end_headers()
+                return
+            
+            # Get a random user id to generate a new person
+            id = random.randint(1, 10000)
+
+            # Values that will be sent to the prediction model
+            send = {
+                'valor_financ':fields['valor_financ'][0], 
+                'id': id
+            }
+
+            # convert to string and send to get prediction
+            response = bytes(str(predictValue(send)), "utf-8")
+
+            # create headers
+            self.send_response(200)
             self.send_header("Content-Length", str(len(response)))
             self.end_headers()
 
-            self.wfile.write(response) #send response
+            #send response
+            self.wfile.write(response) 
 
-    def do_POST(self):
-        self._set_headers()
-        postvars = cgi.FieldStorage(
-            fp=self.rfile,
-            headers=self.headers,
-            environ={'REQUEST_METHOD': 'POST'}
-        )
-
-        # Get the data from the form
-        response = []
-
-        for key in postvars.keys():
-            value = str(postvars.getvalue(key))
-            t = (key+':' + value)
-            print(t)
-            response.append(t)
-
-        # convert to string and send
-        response = bytes(str(response), "utf-8")
-
-        self.send_response(200) #create header
-        self.send_header("Content-Length", str(len(response)))
-        self.end_headers()
-
-        self.wfile.write(response) #send response
-
-httpd = socketserver.TCPServer(("", 8888), MyHandler)
+httpd = socketserver.TCPServer(("", 3333), MyHandler)
 httpd.serve_forever()

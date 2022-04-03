@@ -22,6 +22,7 @@ export class SimulacaoComponent implements OnInit {
   resultadoSimulacao = null;
   dadosIniciaisSimulacao = true;
   dadosResultadoSimulacao = false;
+  fimSimulacao = false;
   isMobile = true;
   public bancoSafraUrl: string = 'https://www.safra.com.br/';
 
@@ -101,6 +102,12 @@ export class SimulacaoComponent implements OnInit {
   }
 
   portabilizar() {
+    this.dadosIniciaisSimulacao = false;
+    this.dadosResultadoSimulacao = false;
+    this.fimSimulacao = true;
+  }
 
+  goBancoSafra() {
+    window.location.href = "";
   }
 }
