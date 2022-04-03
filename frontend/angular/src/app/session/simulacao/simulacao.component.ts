@@ -14,12 +14,20 @@ export class SimulacaoComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  userid = null;
+  parcelaVariavel = true;
+  parcelaFixa = false;
 
   constructor(
     translate: TranslateService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router) {}
+    private router: Router) {
+
+    this.route.params.subscribe(params => {
+      this.userid = this.route.snapshot.paramMap.get('id');
+    });
+  }
 
   ngOnInit() {
     this.formSimulacao = this.formBuilder.group({
@@ -44,5 +52,10 @@ export class SimulacaoComponent implements OnInit {
       return;
     }
 
+  }
+
+  changeParcela() {
+    this.parcelaVariavel = !this.parcelaVariavel;
+    this.parcelaFixa = !this.parcelaFixa;
   }
 }
