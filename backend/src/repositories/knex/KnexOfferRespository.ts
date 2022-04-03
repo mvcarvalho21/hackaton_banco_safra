@@ -48,13 +48,13 @@ class KnexOfferRepository implements IOfferRepository {
 
     }
 
-    async getPredict(): Promise<number> {
+    async getPredict(data: number): Promise<number> {
 
         let result;
 
         let options = {
             method: 'GET',
-            url: 'http://localhost:8888/predict',
+            url: 'http://localhost:3737/predict?valor_financ='+data,
             // body: {
 
             // }
@@ -88,7 +88,6 @@ class KnexOfferRepository implements IOfferRepository {
 
     async acceptOffer(id: string): Promise<number> {
 
-        console.log(id, "ID")
         const response = await knex('offer')
             .update({ accepted: true })
             .where({ id })
@@ -107,14 +106,12 @@ class KnexOfferRepository implements IOfferRepository {
             .where('id', '=', id_offer)
             .where('expire_at', '>=', today)
 
-        console.log(response, "RESPONSE")
         if (response.length > 0) {
             result = true;
         }
 
         return result;
     }
-
 }
 
 

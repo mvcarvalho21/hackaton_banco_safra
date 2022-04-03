@@ -37,10 +37,9 @@ class CreateOfferService {
 
         const old_tax = await this.OfferRepository.createTaxForOffer(data)
 
-        const predict = await this.OfferRepository.getPredict(); // 1-4
+        const predict = await this.OfferRepository.getPredict(data.financed_value_without_fee); // 1-4
 
         let new_tax;
-        console.log(old_tax, "TAX")
 
         //ver se é variável
         switch (predict) {
@@ -82,8 +81,6 @@ class CreateOfferService {
         const total_with_new_tax = (new_tax * data.financed_value_without_fee)/100;
 
         const value_installment_varible = total_with_new_tax + total;
-
-        console.log(total, total_with_new_tax, value_installment_varible, data.financed_value_without_fee,"TESTE")
         
         const saved_variable = (data.financed_value_without_fee * old_tax) - (data.financed_value_without_fee * new_tax)
 
