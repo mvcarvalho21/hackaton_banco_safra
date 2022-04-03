@@ -19,7 +19,7 @@ export class SimulacaoComponent implements OnInit {
   userid = null;
   parcelaVariavel = true;
   parcelaFixa = false;
-  resultadoSimulacao: ReturnSimulacao = null;
+  resultadoSimulacao = null;
   dadosIniciaisSimulacao = true;
   dadosResultadoSimulacao = false;
 
@@ -59,21 +59,31 @@ export class SimulacaoComponent implements OnInit {
     }
 
     let data: RequestSimulacao = {
-      id: this.userid,
       amount_installment: this.f.numeroTotalPrestacoes.value,
       amount_of_rest_installment: this.f.numeroPrestacoesRestantes.value,
       actual_value_installment: this.f.valorParcelaAtual.value,
       financed_value_without_fee: this.f.valorCreditoFinanciado.value,
-      type: this.parcelaVariavel ? 'v' : (this.parcelaFixa ? 'f' : '')
+      type: this.parcelaVariavel ? 'variable' : (this.parcelaFixa ? 'fixed' : '')
     }
 
-    this.sessionService.cadastraSolicitacao(data)
+    this.sessionService.cadastraSolicitacao(this.userid, data)
         .subscribe(
             response => {
-              this.resultadoSimulacao = response;
-              if (this.resultadoSimulacao != null) {
-                this.dadosIniciaisSimulacao = false;
-                this.dadosResultadoSimulacao = true;
+              if (response != null && String(response) != "-1") {
+                this.resultadoSimulacao = {
+                  actual_tax: (response.actual_tax).toFixed(2).replace(".", ","),
+                  actual_value_installment: (response.actual_value_installment).toFixed(2).replace(".", ","),
+                  new_value_installment: (response.new_value_installment).toFixed(2).replace(".", ","),
+                  new_tax: (response.new_tax).toFixed(2).replace(".", ","),
+                  saved_value: (response.saved_value).toFixed(2).replace(".", ","),
+                  new_total_value: (response.new_total_value).toFixed(2).replace(".", ","),
+                  id_offer: response.id_offer,
+                  num_parcelas_restantes: data.amount_of_rest_installment
+                }
+                if (this.resultadoSimulacao != null) {
+                  this.dadosIniciaisSimulacao = false;
+                  this.dadosResultadoSimulacao = true;
+                }
               }
             }, error => {
               console.log("error", error);
