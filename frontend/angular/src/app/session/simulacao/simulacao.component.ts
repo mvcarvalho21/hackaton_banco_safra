@@ -87,6 +87,10 @@ export class SimulacaoComponent implements OnInit {
                   this.dadosIniciaisSimulacao = false;
                   this.dadosResultadoSimulacao = true;
                 }
+              } else {
+                this.dadosIniciaisSimulacao = false;
+                this.dadosResultadoSimulacao = false;
+                this.fimSimulacao = true;
               }
             }, error => {
               console.log("error", error);
