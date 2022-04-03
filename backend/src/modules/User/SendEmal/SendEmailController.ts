@@ -15,11 +15,11 @@ class SendEmailController {
             // } = req.body;
             
             //padronizado por 10
-            const userLogged = await this.sendEmail.execute({
+            const response = await this.sendEmail.execute({
                 amount: 10
             });
 
-            return res.json(userLogged);
+            return res.json(response);
         } catch (error) {
             next(error)
         }

@@ -126,14 +126,11 @@ class KnexUserRepository implements IUserRepository {
 
         let options = {
             method: 'GET',
-            url: 'http://localhost:3737/emails?amount=' + data,
-            // body: {
-
-            // }
+            url: 'http://localhost:3737/emails/' + data,
         };
 
         await axios.request(options).then(async function (response) {
-            result = response.data.emails
+            result = response.data
         }).catch(function (error) {
             console.error(error);
         });
@@ -170,6 +167,7 @@ class KnexUserRepository implements IUserRepository {
                             return error
                         }
                     })
+                    
             }
         }
     }

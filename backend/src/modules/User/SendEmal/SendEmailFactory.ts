@@ -4,8 +4,8 @@ import { SendEmailController } from "./SendEmailController";
 
 export const SendEmailFactory = () => {
     const userRepository = new KnexUserRepository();
-    const login = new SendEmailService(userRepository)
-    const loginController = new SendEmailController(login);
+    const sendmails = new SendEmailService(userRepository)
+    const sendmailsController = new SendEmailController(sendmails);
 
-    return loginController;
+    return sendmailsController;
 }
