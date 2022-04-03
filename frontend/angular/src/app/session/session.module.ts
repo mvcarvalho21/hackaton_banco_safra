@@ -19,6 +19,7 @@ import {SignupComponent} from "./signup/signup.component";
 import {NgxMaskModule, IConfig} from 'ngx-mask';
 import {SimulacaoComponent} from "@app/session/simulacao/simulacao.component";
 import {ResultadoSimulacaoComponent} from "@app/session/resultado-simulacao/resultado-simulacao.component";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -38,6 +39,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    MatToolbarModule,
     NgxMaskModule.forRoot(maskConfigFunction),
   ],
   declarations: [
