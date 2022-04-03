@@ -109,6 +109,19 @@ export class SimulacaoComponent implements OnInit {
     this.dadosIniciaisSimulacao = false;
     this.dadosResultadoSimulacao = false;
     this.fimSimulacao = true;
+
+    this.sessionService.aceitaSolicitacao(this.resultadoSimulacao.id_offer)
+        .subscribe(
+            response => {
+              if (response != null && String(response) == "1") {
+                  console.log('ok');
+                }
+            }, error => {
+              console.log("error", error);
+            }
+        );
+
+    // https://dsaprospectos.com.br:8885/order/:id_offer
   }
 
   goBancoSafra() {
