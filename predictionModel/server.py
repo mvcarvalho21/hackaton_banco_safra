@@ -60,5 +60,5 @@ class MyHandler(BaseHTTPRequestHandler):
 
         self.wfile.write(response) #send response
 
-httpd = socketserver.TCPServer(("", 8080), MyHandler)
+httpd = socketserver.TCPServer(("", 8888), MyHandler)
 httpd.serve_forever()

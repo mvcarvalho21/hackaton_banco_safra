@@ -8,9 +8,9 @@ class CreateOfferController {
     async handle(req: Request, res: Response, next: NextFunction) {
         try {
             const {
-                amount_split,
-                amount_of_rest_splits,
-                actual_value_split,
+                amount_installment,
+                amount_of_rest_installment,
+                actual_value_installment,
                 financed_value_without_fee,
                 type
             } = req.body;
@@ -21,14 +21,13 @@ class CreateOfferController {
 
             const offer = await this.CreateOffer.execute({
                 id,
-                amount_split,
-                amount_of_rest_splits,
-                actual_value_split,
+                amount_installment,
+                amount_of_rest_installment,
+                actual_value_installment,
                 financed_value_without_fee,
                 type
             });
-
-            return res.json(offer);
+            return res.status(200).json(offer);
         } catch (error) {
             next(error)
         }
