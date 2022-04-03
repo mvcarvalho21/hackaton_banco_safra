@@ -1,11 +1,13 @@
+### Quadro KANBAN: https://trello.com/b/T9QivxDk/hackaton-banco-safra
+
 <!-- PROJECT LOGO -->
 <br />
-<p align="center">
+<p style='align="center"'>
   <a href="https://github.com/danieel-reis/hackaton_banco_safra">
     <img src="frontend\angular\src\assets\images\SafraPort-Logo1.png" alt="Logo">
   </a>
 
-  <p align="center">
+  <p style='align="center"'>
     Programa de portabilidade de financiamento do Banco Safra 
   </p>
 </p>
@@ -123,5 +125,3 @@ Iniciar o servidor do Python
   ```sh
   python server.py
   ```
-
-### Quadro KANBAN: https://trello.com/b/T9QivxDk/hackaton-banco-safra
