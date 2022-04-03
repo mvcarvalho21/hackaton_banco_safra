@@ -1,0 +1,57 @@
+<div fxLayout="column">
+    <div fxLayout="row wrap" fxLayoutAlign="center start">
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+            <mat-card class="card-widget mat-light-white cards">
+                <div mat-card-widget>
+<!--                    <div mat-card-float-icon>-->
+<!--                        <mat-icon>attach_money</mat-icon>-->
+<!--                    </div>-->
+                    <div class="pl-0">
+                        <p>Hoje você paga R${{data.valorPagoAtual}}</p>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+            <mat-card class="card-widget mat-light-white cards">
+                <div mat-card-widget>
+<!--                    <div mat-card-float-icon>-->
+<!--                        <mat-icon>attach_money</mat-icon>-->
+<!--                    </div>-->
+                    <div class="pl-0">
+                        <p>Hoje sua taxa é de {{data.taxaAtual}}%</p>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+            <mat-card class="card-widget mat-light-blue cards">
+                <div mat-card-widget>
+<!--                    <div mat-card-float-icon>-->
+<!--                        <mat-icon>attach_money</mat-icon>-->
+<!--                    </div>-->
+                    <div class="pl-0">
+                        <p>Com a portabilidade no Safra você pagará R${{data.valorPagoNovo}}% ao ano</p>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+            <mat-card class="card-widget mat-light-blue cards">
+                <div mat-card-widget>
+<!--                    <div mat-card-float-icon>-->
+<!--                        <mat-icon>attach_money</mat-icon>-->
+<!--                    </div>-->
+                    <div class="pl-0">
+                        <p>Com a portabilidade no Safra sua taxa será {{data.taxaNovo}}% ao ano</p>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+
+    <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+        <p>Fazendo a portabilidade você economizará R${{data.taxaNovo}}%</p>
+    </div>
+
+</div>

@@ -5,6 +5,8 @@ import {AuthenticationService} from "@app/_services/authentication.service";
 import {first} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
 import {CPFValidator} from "@app/_util/validator";
+import {SessionService} from "@app/session/session.service";
+import {RequestCreateUser} from "@app/session/sension.model";
 let md5 = require('md5');
 
 @Component({
@@ -23,14 +25,15 @@ export class SigninComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private sessionService: SessionService,
     private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       cpf: this.formBuilder.control({value: null, disabled: false},
           Validators.compose([Validators.required, CPFValidator.isValidCpf()])),
-      email: ["", Validators.compose([Validators.email])],
-      telefone: ["", Validators.compose([])],
+      email: ["", Validators.compose([Validators.email, Validators.required,])],
+      telefone: ["", Validators.required],
     });
 
     // get return url from route parameters or default to '/'
@@ -48,8 +51,24 @@ export class SigninComponent implements OnInit {
       return;
     }
 
-    console.log('ddd', this.f.cpf.value, this.f.email.value, this.f.telefone.value);
+    let data: RequestCreateUser = {
+      cpf: this.f.cpf.value,
+      email: this.f.email.value,
+      phone: this.f.telefone.value,
+      // password: "",
+      // name: "",
+      // last_name: ""
+    }
 
+    this.sessionService.cadastraUsuario(data)
+        .subscribe(
+            response => {
+              console.log('response', response);
+              // this.router.navigate([`/session/simulacao/${response.id}`]);
+            }, error => {
+              console.log("error", error);
+            }
+        );
 
     // this.authenticationService.login(this.f.email.value, md5(this.f.senha.value))
     //   .pipe(first())

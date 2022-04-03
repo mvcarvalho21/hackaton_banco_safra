@@ -5,18 +5,22 @@ import {first} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: "app-simulacao",
-  templateUrl: "./simulacao.component.html",
-  styleUrls: ["./simulacao.component.scss"]
+  selector: "app-resultado-simulacao",
+  templateUrl: "./resultado-simulacao.component.html",
+  styleUrls: ["./resultado-simulacao.component.scss"]
 })
-export class SimulacaoComponent implements OnInit {
+export class ResultadoSimulacaoComponent implements OnInit {
   formSimulacao: FormGroup;
   submitted = false;
   returnUrl: string;
   error = '';
+  data = {
+    valorPagoAtual: "",
+    taxaAtual: "",
+    valorPagoNovo: "",
+    taxaNovo: "",
+  }
   userid = null;
-  parcelaVariavel = true;
-  parcelaFixa = false;
 
   constructor(
     translate: TranslateService,
@@ -31,10 +35,10 @@ export class SimulacaoComponent implements OnInit {
 
   ngOnInit() {
     this.formSimulacao = this.formBuilder.group({
-      valorCreditoFinanciado: ["", Validators.required],
-      valorParcelaAtual: ["", Validators.required],
-      numeroTotalPrestacoes: ["", Validators.required],
-      numeroPrestacoesRestantes: ["", Validators.required],
+      valorCreditoFinanciado: ["", Validators.compose([])],
+      valorParcelaAtual: ["", Validators.compose([])],
+      numeroTotalPrestacoes: ["", Validators.compose([])],
+      numeroPrestacoesRestantes: ["", Validators.compose([])],
     });
 
     // get return url from route parameters or default to '/'
@@ -52,10 +56,6 @@ export class SimulacaoComponent implements OnInit {
       return;
     }
 
-  }
-
-  changeParcela() {
-    this.parcelaVariavel = !this.parcelaVariavel;
-    this.parcelaFixa = !this.parcelaFixa;
+    console.log('ddd', this.f.cpf.value, this.f.email.value, this.f.telefone.value);
   }
 }

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://xxxx:8080'
+  apiUrl: 'https://dsaprospectos.com.br:8885'
 };

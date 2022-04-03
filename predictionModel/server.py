@@ -8,7 +8,9 @@ import cgi
 
 def getAiResponse():
     # return converting to string
-    return str(random.randint(1, 5))
+    val = str(random.randint(1, 5))
+    # create json
+    return '{"category":' + val + '}'
 
 class MyHandler(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -27,14 +29,6 @@ class MyHandler(BaseHTTPRequestHandler):
             self.wfile.write(response) #send response
 
     def do_POST(self):
-        '''ctype, pdict = parse_header(self.headers.get_content_charset('content-type'))
-        if ctype == 'multipart/form-data':
-            postvars = parse_multipart(self.rfile, pdict)
-        elif ctype == 'application/x-www-form-urlencoded':
-            length = int(self.headers.get_content_charset('content-length'))
-            postvars = parse_qs(self.rfile.read(length), keep_blank_values=1)
-        else:
-            postvars = {}'''
         self._set_headers()
         postvars = cgi.FieldStorage(
             fp=self.rfile,
