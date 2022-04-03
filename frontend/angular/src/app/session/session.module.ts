@@ -18,6 +18,7 @@ import {SigninComponent} from "./signin/signin.component";
 import {SignupComponent} from "./signup/signup.component";
 import {NgxMaskModule, IConfig} from 'ngx-mask';
 import {SimulacaoComponent} from "@app/session/simulacao/simulacao.component";
+import {ResultadoSimulacaoComponent} from "@app/session/resultado-simulacao/resultado-simulacao.component";
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -47,6 +48,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     SigninComponent,
     SignupComponent,
     SimulacaoComponent,
+    ResultadoSimulacaoComponent
   ]
 })
 export class SessionModule {}

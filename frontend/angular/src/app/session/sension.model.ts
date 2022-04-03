@@ -11,3 +11,18 @@ export interface ReturnCreateUser {
   uuid: string
 }
 
+export interface RequestSimulacao {
+
+}
+
+export interface ReturnSimulacao {
+
+}
+
+export interface RequestSimulacaoResultado {
+
+}
+
+export interface ReturnSimulacaoResultado {
+
+}
