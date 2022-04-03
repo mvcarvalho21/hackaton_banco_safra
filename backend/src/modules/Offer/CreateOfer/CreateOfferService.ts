@@ -2,7 +2,6 @@ require('dotenv').config
 
 import { IOfferRepository } from "../../../repositories/IOfferRepository";
 
-
 export interface ICreateOfferRequest {
     id: string;
     amount_installment: number; // Quantidade de parcelas totais
@@ -17,6 +16,7 @@ class CreateOfferService {
     constructor(
         private OfferRepository: IOfferRepository
     ) { }
+
 
     async execute(data: ICreateOfferRequest) {
 
@@ -44,9 +44,11 @@ class CreateOfferService {
         switch (predict) {
             case 3: {
                 new_tax = old_tax - 0.4
+                break;
             }
             case 2: {
                 new_tax = old_tax - 0.2
+                break;
             }
             case 1: {
                 if (data.amount_of_rest_installment > 24) {
@@ -54,35 +56,56 @@ class CreateOfferService {
                 } else {
                     new_tax = old_tax - 0.01
                 }
+                break;
             }
             case 0: {
                 new_tax = old_tax + 10
+                break;
             }
         }
 
-        const total_with_fee = data.amount_installment * data.actual_value_installment
-                
-        const paid_installments = data.amount_installment - data.amount_of_rest_installment
 
-        const paid_value = total_with_fee * paid_installments;
+        const value_to_pay = data.amount_of_rest_installment * data.actual_value_installment
 
-        const rest_value_unpaid = total_with_fee - paid_value
+        const value_to_decrease = (new_tax * data.actual_value_installment) / 100;
 
-        const new_value_installment = rest_value_unpaid*new_tax/data.amount_of_rest_installment;
+        const value_to_decrease_old = (old_tax * data.actual_value_installment) / 100;
+
+        const new_value_installment = data.actual_value_installment - (value_to_decrease_old - value_to_decrease)
+
+        const actual_value_installment = data.actual_value_installment * new_tax
 
         let response = <any>-1
 
-        if(new_tax<old_tax){
+        if (new_tax < old_tax) {
+
+
+            const today = new Date()
+            const tomorrow = new Date(today)
+            const tomorrowDate = new Date(tomorrow.setDate(tomorrow.getDate() + 1))
+
+            const result = await this.OfferRepository.saveOffer(data.amount_installment,
+                data.amount_of_rest_installment,
+                data.actual_value_installment,
+                data.financed_value_without_fee,
+                data.type,
+                old_tax,
+                new_tax,
+                predict,
+                data.id,
+                tomorrowDate)
+
             response = {
                 actual_tax: old_tax,
                 actual_value_installment: data.actual_value_installment,
                 new_value_installment: new_value_installment,
                 new_tax: new_tax,
-                saved_value: total_with_fee-new_value_installment,
-                new_total_value: rest_value_unpaid*new_tax
+                saved_value: value_to_pay - (new_value_installment * data.amount_of_rest_installment),
+                new_total_value: new_value_installment * data.amount_of_rest_installment,
+                id_offer: result
             }
         }
-      
+
         return response;
     }
 

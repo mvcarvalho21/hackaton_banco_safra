@@ -7,7 +7,6 @@ import { errors } from 'celebrate';
 const app = express();
 
 const corsOptions = {
-    exposedHeaders: ['X-Total-Count', 'message', 'Date-Of-Creation'],
   };
 
 

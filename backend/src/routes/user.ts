@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { ActualizeUserFactory } from "../modules/User/ActualizeUser/actualizeUserFactory";
 import { CreateUserFactory } from "../modules/User/CreateUser/CreateUserFactory";
 import { IndexUserFactory } from "../modules/User/IndexUser/IndexUserFactory";
 import { LoginFactory } from "../modules/User/Login/LoginFactory";
@@ -18,6 +19,10 @@ CreateUserFactory().handle(request, response, next)
 
 routes.get('/user', (request, response, next) =>
 IndexUserFactory().handle(request, response, next)
+);
+
+routes.put('/user/:id', (request, response, next) =>
+ActualizeUserFactory().handle(request, response, next)
 );
 
 export default routes;

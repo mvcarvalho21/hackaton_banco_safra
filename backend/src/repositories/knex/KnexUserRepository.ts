@@ -7,6 +7,7 @@ import { errors } from "celebrate";
 import jwt from 'jsonwebtoken';
 import { ICreateUserRequest } from "../../modules/User/CreateUser/CreateUserService";
 import { IIndexUserRequest } from "../../modules/User/IndexUser/IndexUserService";
+import { IActualizeUserRequest } from "../../modules/User/ActualizeUser/actualizeUserService";
 
 const { promisify } = require('util');
 
@@ -56,7 +57,7 @@ class KnexUserRepository implements IUserRepository {
 
     async decodeTokenReturnUserId(req: string) {
         const authHeader = req;
-
+        console.log(authHeader, "AUTH")
         const token = authHeader && authHeader.split(' ')[1];
 
         if (token == null) return errors({ statusCode: 401 })
@@ -69,7 +70,6 @@ class KnexUserRepository implements IUserRepository {
     }
 
     async createUser(data: ICreateUserRequest): Promise<User> {
-        console.log(data, "DATA")
         const user = (await knex('user')
             .insert({
                 cpf: data.cpf,
@@ -90,7 +90,7 @@ class KnexUserRepository implements IUserRepository {
 
         if (data.email) {
             query
-            .where(knex.raw('email::text'), 'like', `%${data.email}%`)
+                .where(knex.raw('email::text'), 'like', `%${data.email}%`)
 
         }
         if (data.cpf) {
@@ -104,6 +104,20 @@ class KnexUserRepository implements IUserRepository {
         const response = await query;
 
         return response;
+    }
+
+    async actualizeUser(data: IActualizeUserRequest): Promise<number> {
+
+        const response = await knex('user')
+            .update({
+                password: await this.encryptedPassword(data.password),
+                name: data.name ? data.name : null,
+                last_name: data.last_name ? data.last_name : null
+            })
+            .where('id', '=', data.id)
+
+        return response;
+
     }
 
 }
