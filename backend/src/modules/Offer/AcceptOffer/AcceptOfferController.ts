@@ -13,15 +13,18 @@ class AcceptOfferController {
                 id_offer
             } = req.params;
 
+            // const offer = await this.AcceptOffer.execute({
+            //     id_offer: id_offer
+            // }, req.headers['authorization']);
+
             const offer = await this.AcceptOffer.execute({
                 id_offer: id_offer
-            }, req.headers['authorization']);
-            console.log(offer, "OFER")
+            });
+
             return res.status(200).json(offer);
         } catch (error) {
             next(error)
         }
-
     }
 }
 

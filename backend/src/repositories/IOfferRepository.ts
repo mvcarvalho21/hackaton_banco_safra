@@ -4,6 +4,7 @@ import { ICreateOfferRequest } from "../modules/Offer/CreateOfer/CreateOfferServ
 export interface IOfferRepository {
     createTaxForOffer(data: ICreateOfferRequest): Promise<number>
     getPredict(): Promise<number>
+    
     saveOffer(amount_split: number,
         amount_of_rest_splits: number,
         actual_value_split: number,

@@ -33,13 +33,13 @@ class KnexOfferRepository implements IOfferRepository {
             }
             case "variable": {
 
-                const calc1 = data.financed_value_without_fee / data.amount_installment;
+                const calc1 = data.financed_value_without_fee / data.amount_installment; //ok
 
-                const tax_per_month = data.actual_value_installment - calc1
+                const tax_per_month = data.actual_value_installment - calc1 // ok
 
-                const result = tax_per_month / (0.001 * data.financed_value_without_fee) * 1200
+                const result = (tax_per_month / data.financed_value_without_fee) * 1200
 
-                response = result;
+                response = result/12;
                 break;
             }
         }
