@@ -5,6 +5,7 @@ import {NotFoundComponent} from "./not-found/not-found.component";
 import {Routes} from "@angular/router";
 import {SigninComponent} from "./signin/signin.component";
 import {SignupComponent} from "./signup/signup.component";
+import {SimulacaoComponent} from "@app/session/simulacao/simulacao.component";
 
 export const SessionRoutes: Routes = [
   {
@@ -31,9 +32,13 @@ export const SessionRoutes: Routes = [
         component: SigninComponent
       },
       {
-        path: "register",
-        component: SignupComponent
-      }
+        path: "simulacao/:id",
+        component: SimulacaoComponent
+      },
+      // {
+      //   path: "register",
+      //   component: SignupComponent
+      // }
     ]
   }
 ];

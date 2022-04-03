@@ -1,0 +1,55 @@
+<div class="session mat-indigo">
+  <div class="session-content">
+    <div class="session-wrapper">
+      <mat-card>
+        <mat-card-content>
+          <form [formGroup]="formSimulacao" (ngSubmit)="onSubmit()">
+            <div fxLayout="column" fxLayoutAlign="space-around">
+              <div class="pb-1">
+                <mat-form-field style="width: 100%">
+                  <input matInput
+                         placeholder="Valor total do cŕedito financiado"
+                         mask="0*"
+                         [formControl]="formSimulacao.controls['valorCreditoFinanciado']">
+                </mat-form-field>
+                <small *ngIf="formSimulacao.controls['valorCreditoFinanciado'].hasError('required') && formSimulacao.controls['valorCreditoFinanciado'].touched"
+                       class="mat-text-warn">Campo obrigatório.</small>
+              </div>
+              <div class="pb-1">
+                <mat-form-field style="width: 100%">
+                  <input matInput
+                         placeholder="Valor da sua parcela atual"
+                         mask="0*"
+                         [formControl]="formSimulacao.controls['valorParcelaAtual']">
+                </mat-form-field>
+                <small *ngIf="formSimulacao.controls['valorParcelaAtual'].hasError('required') && formSimulacao.controls['valorParcelaAtual'].touched"
+                       class="mat-text-warn">Campo obrigatório.</small>
+              </div>
+                <div class="pb-1">
+                    <mat-form-field style="width: 100%">
+                        <input matInput
+                               placeholder="Número total de prestações"
+                               mask="0*"
+                               [formControl]="formSimulacao.controls['numeroTotalPrestacoes']">
+                    </mat-form-field>
+                    <small *ngIf="formSimulacao.controls['numeroTotalPrestacoes'].hasError('required') && formSimulacao.controls['numeroTotalPrestacoes'].touched"
+                           class="mat-text-warn">Campo obrigatório.</small>
+                </div>
+                <div class="pb-1">
+                    <mat-form-field style="width: 100%">
+                        <input matInput
+                               placeholder="Número de prestações restantes"
+                               mask="0*"
+                               [formControl]="formSimulacao.controls['numeroPrestacoesRestantes']">
+                    </mat-form-field>
+                    <small *ngIf="formSimulacao.controls['numeroPrestacoesRestantes'].hasError('required') && formSimulacao.controls['numeroPrestacoesRestantes'].touched"
+                           class="mat-text-warn">Campo obrigatório.</small>
+                </div>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!formSimulacao.valid">Simular</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

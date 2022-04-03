@@ -17,6 +17,7 @@ import {SessionRoutes} from "./session.routing";
 import {SigninComponent} from "./signin/signin.component";
 import {SignupComponent} from "./signup/signup.component";
 import {NgxMaskModule, IConfig} from 'ngx-mask';
+import {SimulacaoComponent} from "@app/session/simulacao/simulacao.component";
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -44,7 +45,8 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     ForgotComponent,
     LockscreenComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    SimulacaoComponent,
   ]
 })
 export class SessionModule {}
