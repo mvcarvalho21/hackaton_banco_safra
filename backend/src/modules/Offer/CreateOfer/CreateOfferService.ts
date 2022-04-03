@@ -45,18 +45,18 @@ class CreateOfferService {
         //ver se é variável
         switch (predict) {
             case 3: {
-                (data.type === 'variable') ? new_tax = old_tax/12 - 0.4 : new_tax = old_tax - 0.4
+                (data.type === 'variable') ? new_tax = old_tax - 0.1 : new_tax = old_tax - 0.4
                 break;
             }
             case 2: {
-                (data.type === 'variable') ? new_tax = old_tax/12 - 0.2 : new_tax = old_tax - 0.2
+                (data.type === 'variable') ? new_tax = old_tax - 0.05 : new_tax = old_tax - 0.2
                 break;
             }
             case 1: {
                 if (data.amount_of_rest_installment > 24) {
-                    (data.type === 'variable') ? new_tax = old_tax/12 - 0.05 : new_tax = old_tax - 0.05
+                    (data.type === 'variable') ? new_tax = old_tax - 0.0005 : new_tax = old_tax - 0.05
                 } else {
-                    (data.type === 'variable') ? new_tax = old_tax/12 - 0.01 : new_tax = old_tax - 0.01
+                    (data.type === 'variable') ? new_tax = old_tax - 0.0001 : new_tax = old_tax - 0.01
                 }
                 break;
             }
@@ -76,7 +76,18 @@ class CreateOfferService {
 
         const actual_value_installment = data.actual_value_installment * new_tax
 
-        const vle_to_pay =  (data.financed_value_without_fee/data.amount_installment)*data.amount_of_rest_installment
+        //variable
+        const total = data.financed_value_without_fee/data.amount_installment;
+
+        const total_with_new_tax = (new_tax * data.financed_value_without_fee)/100;
+
+        const value_installment_varible = total_with_new_tax + total;
+
+        console.log(total, total_with_new_tax, value_installment_varible, data.financed_value_without_fee,"TESTE")
+        
+        const saved_variable = (data.financed_value_without_fee * old_tax) - (data.financed_value_without_fee * new_tax)
+
+        const total_variable = (data.financed_value_without_fee * new_tax)
 
         let response = <any>-1
 
@@ -98,12 +109,12 @@ class CreateOfferService {
                 tomorrowDate)
 
             response = {
-                actual_tax: old_tax*12,
+                actual_tax: old_tax,
                 actual_value_installment: data.actual_value_installment,
-                new_value_installment: actual_value_installment,
-                new_tax: new_tax*12,
-                saved_value: value_to_pay - (new_value_installment * data.amount_of_rest_installment),
-                new_total_value: new_value_installment * data.amount_of_rest_installment,
+                new_value_installment: data.type === 'variable' ? value_installment_varible : actual_value_installment,
+                new_tax: new_tax,
+                saved_value: data.type === 'variable' ? saved_variable : value_to_pay - (new_value_installment * data.amount_of_rest_installment),
+                new_total_value: data.type === 'variable' ? total_variable : new_value_installment * data.amount_of_rest_installment,
                 id_offer: result
             }
         }
