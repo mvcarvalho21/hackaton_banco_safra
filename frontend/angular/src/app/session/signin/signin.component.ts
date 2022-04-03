@@ -19,6 +19,7 @@ export class SigninComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  public bancoSafraUrl: string = 'https://www.safra.com.br/';
 
   constructor(
     translate: TranslateService,
@@ -63,8 +64,8 @@ export class SigninComponent implements OnInit {
     this.sessionService.cadastraUsuario(data)
         .subscribe(
             response => {
-              console.log('response', response);
-              // this.router.navigate([`/session/simulacao/${response.id}`]);
+              // console.log('response', response);
+              this.router.navigate([`/session/simulacao/${response}`]);
             }, error => {
               console.log("error", error);
             }

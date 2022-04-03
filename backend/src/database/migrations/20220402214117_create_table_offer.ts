@@ -12,6 +12,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('old_tax');
         table.string('new_tax');
         table.decimal('actual_score');
+        table.boolean('accepted').defaultTo(false);
 
         table.uuid('id_user').references('user.id').notNullable();
 

@@ -5,60 +5,114 @@ import { ICreateOfferRequest } from "../../modules/Offer/CreateOfer/CreateOfferS
 import { IOfferRepository } from "../IOfferRepository";
 
 const knex = require("../../database/index");
+const axios = require("axios").default;
 
 class KnexOfferRepository implements IOfferRepository {
 
-    async createTaxForOffer(data: ICreateOfferRequest): Promise<Offer> {
+    async createTaxForOffer(data: ICreateOfferRequest): Promise<number> {
 
         let response;
 
         switch (data.type) {
             case "fixed": {
 
-                const total_with_fee = data.amount_split * data.actual_value_split
-                const paid_splits = data.amount_split - data.amount_of_rest_splits
+                const paid_value = (data.amount_installment - data.amount_of_rest_installment) * data.actual_value_installment
 
-                const paid_value = total_with_fee * paid_splits;
-                const rest_value_with_fee = total_with_fee * data.amount_of_rest_splits; //saldo devedor
+                const total_with_fee = (data.amount_of_rest_installment * data.actual_value_installment)
 
-                const rest_value_without_fee = (data.financed_value_without_fee / data.amount_split * data.amount_of_rest_splits)
+                const rest_value = data.financed_value_without_fee / data.amount_installment * data.amount_of_rest_installment
 
-                const taxed = total_with_fee * data.amount_split - data.financed_value_without_fee;
+                const result = (data.actual_value_installment * data.amount_installment) - data.financed_value_without_fee
 
-                const result = taxed / data.financed_value_without_fee / data.amount_split * 100
+                const result2 = result / data.financed_value_without_fee / data.amount_installment * 100
 
-                response = result;
+                response = result2
+                // Valor restante (sem juros) = (5000 / 12 x 5) = 2083
+                // Taxa de juros = 650 x 12 - 5000 = 2800 / 5000 / 12 x 100 = 0,4666/mês = 46,66 %/mês
+                break;
             }
             case "variable": {
 
-                const calc1 = data.financed_value_without_fee / data.amount_split;
-                const tax_per_month = data.actual_value_split - calc1
+                const calc1 = data.financed_value_without_fee / data.amount_installment;
+
+                const tax_per_month = data.actual_value_installment - calc1
+
                 const result = tax_per_month / (0.001 * data.financed_value_without_fee) * 1200
 
                 response = result;
+                break;
             }
         }
 
-        const today = new Date()
-        const tomorrow = new Date(today)
-        const expire_at = tomorrow.setDate(tomorrow.getDate() + 1)
+        return response;
 
-        const offer = await knex('offer')
-            .insert({
-                amount_split: data.amount_split,
-                amount_of_rest_splits: data.amount_of_rest_splits,
-                actual_value_split: data.actual_value_split,
-                financed_value_without_fee: data.financed_value_without_fee,
-                type: data.type,
-                old_tax: response,
-                new_tax: 0,
-                actual_score: 0,
-                expire_at: expire_at,
-                id_user: data.id
-            })
+    }
 
-        return offer;
+    async getPredict(): Promise<number> {
 
+        let result;
+
+        let options = {
+            method: 'GET',
+            url: 'http://localhost:8888/predict',
+            // body: {
+
+            // }
+        };
+
+        await axios.request(options).then(async function (response) {
+            result = response.data.category
+        }).catch(function (error) {
+            console.error(error);
+        });
+        return result;
+    }
+
+    async saveOffer(amount_installment: number, amount_of_rest_installment: number, actual_value_installment: number, financed_value_without_fee: number, type: string, old_tax: number, new_tax: number, actual_score: number, id_user: string, expire_at: Date): Promise<string> {
+
+        const offer = (await knex('offer').insert({
+            amount_split: amount_installment,
+            amount_of_rest_splits: amount_of_rest_installment,
+            actual_value_split: actual_value_installment,
+            financed_value_without_fee: financed_value_without_fee,
+            type: type,
+            old_tax: old_tax,
+            new_tax: new_tax,
+            actual_score: actual_score,
+            id_user: id_user,
+            expire_at: expire_at
+        }).returning('id'))[0]
+
+        return offer.id;
+    }
+
+    async acceptOffer(id: string): Promise<number> {
+
+        console.log(id, "ID")
+        const response = await knex('offer')
+            .update({ accepted: true })
+            .where({ id })
+
+        return response;
+    }
+
+    async conferenceIds(id_offer: string, id_user: string): Promise<boolean> {
+
+      
+        let result = false;
+
+        const today = new Date();
+        const response = await knex('offer')
+            .where('id_user', '=', id_user)
+            .where('id', '=', id_offer)
+            .where('expire_at', '>=', today)
+
+        console.log(response, "RESPONSE")
+        if (response.length > 0) {
+            result = true;
+        }
+
+        return result;
     }
 
 }

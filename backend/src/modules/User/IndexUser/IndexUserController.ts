@@ -1,9 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { IIndexUserRequest, IndexUserService } from "./IndexUserService";
 
-class IndexUserController {
-    
-    interface 
+class IndexUserController { 
 
     constructor(
         private IndexUser: IndexUserService
