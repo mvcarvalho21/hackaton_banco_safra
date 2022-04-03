@@ -21,3 +21,48 @@
   display: inline-block;
   margin-bottom: -10px;
 }
+
+.card1 {
+  border-color: #003A48;
+  border-width: 5px;
+  border-radius: 7.5px;
+  text-align: center;
+  font-size: 18px;
+  max-height: 100%;
+}
+
+.card2 {
+  background-color: #00596F;
+  border-radius: 7.5px;
+  text-align: center;
+  max-height: 100%;
+  font-size: 18px;
+  color: #ffffff !important;
+  font-color: #ffffff !important;
+}
+
+.text-style{
+  font-family: 'Roboto','Sans-serife';
+  font-size: 25px;
+  color: green;
+  text-align: center;
+}
+
+.h1-home-style{
+  font-family: 'Roboto','Sans-serife';
+  font-size: 21px;
+  color: #003A48;
+  text-align: center;
+}
+
+.h2-home-style{
+  font-family: 'Roboto','Sans-serife';
+  font-size: 25px;
+  color: #003A48;
+  text-align: center;
+}
+
+.button-home-style{
+  background-color: #003A48;
+  border-radius: 7.5px;
+}

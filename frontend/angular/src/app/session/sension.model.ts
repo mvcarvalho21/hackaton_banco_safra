@@ -20,11 +20,11 @@ export interface RequestSimulacao {
 }
 
 export interface ReturnSimulacao {
-  actual_tax: number,
-  actual_value_installment: number,
-  new_value_installment: number,
-  new_tax: number,
-  saved_value: number,
-  new_total_value: number,
+  actual_tax: number;
+  actual_value_installment: number;
+  new_value_installment: number;
+  new_tax: number;
+  saved_value: number;
+  new_total_value: number;
   id_offer: string
 }

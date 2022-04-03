@@ -10,11 +10,6 @@ export const AppRoutes: Routes = [
     component: AdminLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      {
-        path: "",
-        canActivate: [AuthGuard],
-        loadChildren: () => import("./dashboard/dashboard.module").then(m => m.DashboardModule)
-      },
       // {
       //   path: "crud",
       //   canActivate: [AuthGuard],

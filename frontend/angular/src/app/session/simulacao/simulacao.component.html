@@ -63,7 +63,7 @@
                                   [checked]="parcelaVariavel"
                                   (change)="changeParcela()">Parcela variável</mat-checkbox>
                 </div>
-              <button mat-raised-button color="primary" type="submit" [disabled]="!formSimulacao.valid">Simular</button>
+              <button mat-raised-button class="button-home-style" color="primary" type="submit" [disabled]="!formSimulacao.valid">Simular</button>
             </div>
           </form>
         </mat-card-content>
@@ -83,61 +83,33 @@
                             <div class="pb-1">
                                 <div fxLayout="row wrap" fxLayoutAlign="center start">
                                     <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                                        <mat-card class="card-widget mat-light-white cards">
-                                            <div mat-card-widget>
-                                                <!--                    <div mat-card-float-icon>-->
-                                                <!--                        <mat-icon>attach_money</mat-icon>-->
-                                                <!--                    </div>-->
-                                                <div class="pl-0">
-                                                    <p>Hoje você paga<br>R${{resultadoSimulacao.actual_value_installment}}</p>
-                                                </div>
-                                            </div>
+                                        <mat-card class="card1">
+                                            <p>Hoje você paga R${{resultadoSimulacao.actual_value_installment}}</p>
                                         </mat-card>
                                     </div>
                                     <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                                        <mat-card class="card-widget mat-light-white cards">
-                                            <div mat-card-widget>
-                                                <!--                    <div mat-card-float-icon>-->
-                                                <!--                        <mat-icon>attach_money</mat-icon>-->
-                                                <!--                    </div>-->
-                                                <div class="pl-0">
-                                                    <p>Hoje sua taxa é de<br>{{resultadoSimulacao.actual_tax}}% ao mês</p>
-                                                </div>
-                                            </div>
+                                        <mat-card class="card1">
+                                            <p>Sua taxa é de {{resultadoSimulacao.actual_tax}}% ao mês</p>
                                         </mat-card>
                                     </div>
                                     <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                                        <mat-card class="card-widget mat-light-blue cards">
-                                            <div mat-card-widget>
-                                                <!--                    <div mat-card-float-icon>-->
-                                                <!--                        <mat-icon>attach_money</mat-icon>-->
-                                                <!--                    </div>-->
-                                                <div class="pl-0">
-                                                    <p>Com a portabilidade no Safra você pagará R${{resultadoSimulacao.new_value_installment}}</p>
-                                                </div>
-                                            </div>
+                                        <mat-card class="card2">
+                                            <p>Com a portabilidade no Safra você pagará R${{resultadoSimulacao.new_value_installment}}</p>
                                         </mat-card>
                                     </div>
                                     <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                                        <mat-card class="card-widget mat-light-blue cards">
-                                            <div mat-card-widget>
-                                                <!--                    <div mat-card-float-icon>-->
-                                                <!--                        <mat-icon>attach_money</mat-icon>-->
-                                                <!--                    </div>-->
-                                                <div class="pl-0">
-                                                    <p>Com a portabilidade no Safra sua taxa será de {{resultadoSimulacao.new_tax}}% ao mês</p>
-                                                </div>
-                                            </div>
+                                        <mat-card class="card2">
+                                            <p>Com a portabilidade no Safra sua taxa será de {{resultadoSimulacao.new_tax}}% ao mês</p>
                                         </mat-card>
                                     </div>
                                 </div>
                             </div>
                             <div class="pb-1">
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                                    <p>Fazendo a portabilidade você economizará R${{resultadoSimulacao.saved_value}}</p>
+                                    <p class="text-style">Fazendo a portabilidade você economizará R${{resultadoSimulacao.saved_value}}</p>
                                 </div>
                             </div>
-                            <button mat-raised-button color="primary" (click)="portabilizar()">Peça agora sua portabilidade</button>
+                            <button mat-raised-button class="button-home-style" color="primary" (click)="portabilizar()">Peça agora sua portabilidade</button>
                             <br>
                             <div class="pb-1">
                                 <div fxLayout="row wrap" fxLayoutAlign="center start" class="no-padding">
@@ -169,7 +141,7 @@
                                         <p>Valor da nova taxa:</p>
                                     </div>
                                     <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="30" class="text-align-right">
-                                        <p>{{resultadoSimulacao.new_tax}}% a.m</p>
+                                        <p>{{resultadoSimulacao.new_tax}}% a.a</p>
                                     </div>
                                     <div fxFlex.gt-sm="70" fxFlex.gt-xs="70" fxFlex="70" class="no-padding">
                                         <p>Custo da portabilidade:</p>
@@ -195,15 +167,13 @@
                 <mat-card-content>
                     <div fxLayout="column" fxLayoutAlign="space-around">
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <p>Agradecemos o interesse</p>
-                        </div>
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <p>Em breve estaremos entrando em contato</p>
+                            <p class="h2-home-style">Agradecemos o interesse</p>
+                            <p class="h1-home-style">Em breve entraremos em contato</p>
                         </div>
                         <img src="/assets/images/img2.jpg" alt="" width="100%" height="100%"
                              matTooltip="BANCO SAFRA" matTooltipPosition="above">
                         <br>
-                        <button mat-raised-button color="primary" (click)="goBancoSafra()">
+                        <button mat-raised-button class="button-home-style" color="primary" (click)="goBancoSafra()">
                             Conheça as vantagens de ser um cliente Safra
                         </button>
                         <a [href]="bancoSafraUrl" target="_blank">
