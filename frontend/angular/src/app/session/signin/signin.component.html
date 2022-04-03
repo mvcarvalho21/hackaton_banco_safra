@@ -6,9 +6,9 @@
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="text-xs-center pb-1">
 <!--              <img src="assets/images/logo-dark.svg" class="size-image" alt=""/>-->
-              <p class="mat-text-muted">Taxas menores no financiamento?</p>
-              <p class="mat-text-muted">#VemParaOSafra</p>
-              <p class="mat-text-muted">Faça uma simulação para sua portabilidade de cŕedito</p>
+              <h1 class="h1-home-style">Taxas menores no financiamento?</h1>
+              <h2 class="h2-home-style">#VemParaOSafra</h2>
+              <p class="text-home-style">Faça uma simulação para sua portabilidade de cŕedito</p>
             </div>
             <div fxLayout="column" fxLayoutAlign="space-around">
               <div class="pb-1">
@@ -41,7 +41,7 @@
                 <small *ngIf="form.controls['telefone'].hasError('required') && form.controls['telefone'].touched"
                        class="mat-text-warn">Telefone é obrigatória.</small>
               </div>
-              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Simular</button>
+              <button mat-raised-button class="button-home-style" color="primary" type="submit" [disabled]="!form.valid">Continuar</button>
             </div>
           </form>
         </mat-card-content>

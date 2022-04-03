@@ -63,8 +63,8 @@ export class SigninComponent implements OnInit {
     this.sessionService.cadastraUsuario(data)
         .subscribe(
             response => {
-              console.log('response', response);
-              // this.router.navigate([`/session/simulacao/${response.id}`]);
+              // console.log('response', response);
+              this.router.navigate([`/session/simulacao/${response}`]);
             }, error => {
               console.log("error", error);
             }
