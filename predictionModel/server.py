@@ -32,8 +32,11 @@ class MyHandler(BaseHTTPRequestHandler):
             }
 
             # convert to string and send to get prediction
-            response = bytes(str(predictValue(send)), "utf-8")
+            response = str(predictValue(send))
 
+            # Create json response
+            response = bytes('{ "category": '+ response +'}', "utf-8")
+            
             # create headers
             self.send_response(200)
             self.send_header("Content-Length", str(len(response)))
@@ -42,5 +45,5 @@ class MyHandler(BaseHTTPRequestHandler):
             #send response
             self.wfile.write(response) 
 
-httpd = socketserver.TCPServer(("", 3333), MyHandler)
+httpd = socketserver.TCPServer(("", 3737), MyHandler)
 httpd.serve_forever()
