@@ -19,6 +19,7 @@ export class SigninComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  public bancoSafraUrl: string = 'https://www.safra.com.br/';
 
   constructor(
     translate: TranslateService,
