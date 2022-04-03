@@ -12,10 +12,10 @@ class SendEmailController {
 
             const {
                 amount
-            } = req.body;
+            } = req.params;
 
             const userLogged = await this.sendEmail.execute({
-                amount
+                amount : parseInt(amount)
             });
 
             return res.json(userLogged);

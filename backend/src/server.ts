@@ -16,7 +16,7 @@ const options = {
 cron.schedule('0 0 18 * * *', async function () {
     let options = {
         method: 'GET',
-        url: 'http://localhost:3737/emails/' + 10,
+        url: 'http://localhost:'+ process.env.PORT +'/sendemail/10',
     };
 
     await axios.request(options).then(async function (response) {
