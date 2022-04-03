@@ -87,4 +87,8 @@ export class SimulacaoComponent implements OnInit {
     this.parcelaVariavel = !this.parcelaVariavel;
     this.parcelaFixa = !this.parcelaFixa;
   }
+
+  portabilizar() {
+
+  }
 }
