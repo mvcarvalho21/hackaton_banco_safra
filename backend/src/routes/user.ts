@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { CreateUserFactory } from "../modules/User/CreateUser/CreateUserFactory";
+import { IndexUserFactory } from "../modules/User/IndexUser/IndexUserFactory";
 import { LoginFactory } from "../modules/User/Login/LoginFactory";
 
 const routes = Router();
@@ -13,6 +14,10 @@ LoginFactory().handle(request, response, next)
 
 routes.post('/user', (request, response, next) =>
 CreateUserFactory().handle(request, response, next)
+);
+
+routes.get('/user', (request, response, next) =>
+IndexUserFactory().handle(request, response, next)
 );
 
 export default routes;
