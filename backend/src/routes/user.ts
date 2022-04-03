@@ -26,9 +26,9 @@ routes.put('/user/:id', (request, response, next) =>
 ActualizeUserFactory().handle(request, response, next)
 );
 
-routes.post('/sendemail/:amount', (request, response, next) =>
-SendEmailFactory().handle(request, response, next)
-);
+// routes.post('/sendemail/:amount', (request, response, next) =>
+// SendEmailFactory().handle(request, response, next)
+// );
 
 
 export default routes;
