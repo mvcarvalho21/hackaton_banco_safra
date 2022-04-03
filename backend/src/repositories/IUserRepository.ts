@@ -1,4 +1,6 @@
 import { User } from "../entities/User";
+import { IActualizeUserRequest } from "../modules/User/ActualizeUser/actualizeUserService";
+
 import { ICreateUserRequest } from "../modules/User/CreateUser/CreateUserService";
 import { IIndexUserRequest } from "../modules/User/IndexUser/IndexUserService";
 
@@ -12,4 +14,5 @@ export interface IUserRepository {
     decodeTokenReturnUserId(req: string): Promise<string>
     createUser(data: ICreateUserRequest): Promise<User>
     search(data: IIndexUserRequest): Promise<User[]>
+    actualizeUser(data: IActualizeUserRequest): Promise<number>
 }
