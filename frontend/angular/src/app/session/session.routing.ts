@@ -6,6 +6,7 @@ import {Routes} from "@angular/router";
 import {SigninComponent} from "./signin/signin.component";
 import {SignupComponent} from "./signup/signup.component";
 import {SimulacaoComponent} from "@app/session/simulacao/simulacao.component";
+import {ResultadoSimulacaoComponent} from "@app/session/resultado-simulacao/resultado-simulacao.component";
 
 export const SessionRoutes: Routes = [
   {
@@ -34,6 +35,10 @@ export const SessionRoutes: Routes = [
       {
         path: "simulacao/:id",
         component: SimulacaoComponent
+      },
+      {
+        path: "resultadosimulacao/:id",
+        component: ResultadoSimulacaoComponent
       },
       // {
       //   path: "register",

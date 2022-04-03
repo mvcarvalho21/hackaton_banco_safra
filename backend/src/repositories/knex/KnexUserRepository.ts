@@ -6,6 +6,7 @@ import Crypto from "../../util/crypto";
 import { errors } from "celebrate";
 import jwt from 'jsonwebtoken';
 import { ICreateUserRequest } from "../../modules/User/CreateUser/CreateUserService";
+import { IIndexUserRequest } from "../../modules/User/IndexUser/IndexUserService";
 
 const { promisify } = require('util');
 
@@ -19,7 +20,7 @@ class KnexUserRepository implements IUserRepository {
 
     async encryptedPassword(password: string): Promise<string> {
         const password_encrypted = await crypt.encrypt(password);
-
+        console.log(password_encrypted, "PASS", password)
         return password_encrypted;
     }
 
@@ -74,12 +75,35 @@ class KnexUserRepository implements IUserRepository {
                 cpf: data.cpf,
                 email: data.email,
                 phone: data.phone,
-                password: data.password ? this.encryptedPassword(data.password) : "",
+                password: data.password,
                 name: data.name ? data.name : "",
                 last_name: data.last_name ? data.last_name : ""
             }).returning('id'))[0]
 
         return user;
+    }
+    async search(data: IIndexUserRequest): Promise<User[]> {
+
+        const query = knex('user')
+            .limit(10)
+            .offset((<number>data.page - 1) * 10)
+
+        if (data.email) {
+            query
+            .where(knex.raw('email::text'), 'like', `%${data.email}%`)
+
+        }
+        if (data.cpf) {
+            query
+                .where(knex.raw('cpf::text'), 'like', `%${data.cpf}%`)
+        }
+        if (data.phone) {
+            query.where('phone', 'like', data.phone)
+        }
+
+        const response = await query;
+
+        return response;
     }
 
 }

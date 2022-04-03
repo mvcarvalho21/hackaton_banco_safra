@@ -34,7 +34,7 @@ class LoginService {
         }
 
         const compare = await this.userRepository.comparePassword(user, data.password);
-
+       
         if (!compare) {
             throw new Error('Senha incorreta.')
         }
