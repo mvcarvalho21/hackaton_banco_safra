@@ -22,6 +22,8 @@ export class SimulacaoComponent implements OnInit {
   resultadoSimulacao = null;
   dadosIniciaisSimulacao = true;
   dadosResultadoSimulacao = false;
+  isMobile = true;
+  public bancoSafraUrl: string = 'https://www.safra.com.br/';
 
   constructor(
     translate: TranslateService,
