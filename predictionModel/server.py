@@ -8,7 +8,7 @@ import cgi
 
 def getAiResponse():
     # return converting to string
-    val = str(random.randint(1, 5))
+    val = str(random.randint(0, 4))
     # create json
     return '{"category":' + val + '}'
 
