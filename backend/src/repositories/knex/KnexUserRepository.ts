@@ -7,7 +7,8 @@ import { errors } from "celebrate";
 import jwt from 'jsonwebtoken';
 import { ICreateUserRequest } from "../../modules/User/CreateUser/CreateUserService";
 import { IIndexUserRequest } from "../../modules/User/IndexUser/IndexUserService";
-import { IActualizeUserRequest } from "../../modules/User/ActualizeUser/actualizeUserService";
+import { IActualizeUserRequest } from "../../modules/User/ActualizeUser/ActualizeUserService";
+import * as nodemailer from 'nodemailer'
 
 const { promisify } = require('util');
 
@@ -16,12 +17,12 @@ const EXPIRES_IN = Number(process.env.JSON_WEBTOKEN_EXPIRES_IN);
 
 const knex = require("../../database/index");
 const crypt = new Crypto();
+const axios = require("axios").default;
 
 class KnexUserRepository implements IUserRepository {
 
     async encryptedPassword(password: string): Promise<string> {
         const password_encrypted = await crypt.encrypt(password);
-        console.log(password_encrypted, "PASS", password)
         return password_encrypted;
     }
 
@@ -57,7 +58,6 @@ class KnexUserRepository implements IUserRepository {
 
     async decodeTokenReturnUserId(req: string) {
         const authHeader = req;
-        console.log(authHeader, "AUTH")
         const token = authHeader && authHeader.split(' ')[1];
 
         if (token == null) return errors({ statusCode: 401 })
@@ -118,6 +118,60 @@ class KnexUserRepository implements IUserRepository {
 
         return response;
 
+    }
+
+    async getEmailsFromApi(data: number): Promise<string[]> {
+
+        let result = [];
+
+        let options = {
+            method: 'GET',
+            url: 'http://localhost:3737/emails?amount=' + data,
+            // body: {
+
+            // }
+        };
+
+        await axios.request(options).then(async function (response) {
+            result = response.data.emails
+        }).catch(function (error) {
+            console.error(error);
+        });
+
+        return result;
+
+    }
+
+    async sendEmail(data: string[]): Promise<void> {
+        for (let i = 0; i < data.length; i++) {
+            if (process.env.TEST === "true") {
+                console.log("EMAIL ENVIADO PARA: " + data[i])
+            } else {
+
+                const transporter = nodemailer.createTransport({
+                    host: process.env.MAIL_HOST,
+                    service: process.env.MAIL_SERVICE,
+                    port: 587,
+                    secure: true,
+                    auth: {
+                        user: process.env.MAIL_USER,
+                        pass: process.env.MAIL_PASS
+                    }
+                })
+                await transporter.sendMail({
+                    from: process.env.USER,
+                    to: data[i],
+                    subject: "Oportunidade 1",
+                    html: "Message teste"
+                },
+                    (error) => {
+                        if (error) {
+                            console.log(error)
+                            return error
+                        }
+                    })
+            }
+        }
     }
 
 }

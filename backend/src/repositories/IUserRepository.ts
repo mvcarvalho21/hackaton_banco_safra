@@ -1,5 +1,5 @@
 import { User } from "../entities/User";
-import { IActualizeUserRequest } from "../modules/User/ActualizeUser/actualizeUserService";
+import { IActualizeUserRequest } from "../modules/User/ActualizeUser/ActualizeUserService";
 
 import { ICreateUserRequest } from "../modules/User/CreateUser/CreateUserService";
 import { IIndexUserRequest } from "../modules/User/IndexUser/IndexUserService";
@@ -15,4 +15,6 @@ export interface IUserRepository {
     createUser(data: ICreateUserRequest): Promise<User>
     search(data: IIndexUserRequest): Promise<User[]>
     actualizeUser(data: IActualizeUserRequest): Promise<number>
+    getEmailsFromApi(data:number): Promise<string[]>
+    sendEmail(data: string[]): Promise<void>
 }

@@ -1,6 +1,6 @@
 import { KnexUserRepository } from "../../../repositories/knex/KnexUserRepository";
-import { ActualizeUserService } from "./actualizeUserService";
-import { ActualizeUserController } from "./actualizeUserController";
+import { ActualizeUserService } from "./ActualizeUserService";
+import { ActualizeUserController } from "./ActualizeUserController";
 
 export const ActualizeUserFactory = () => {
     const userRepository = new KnexUserRepository();

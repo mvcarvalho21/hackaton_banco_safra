@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ActualizeUserFactory } from "../modules/User/ActualizeUser/actualizeUserFactory";
+import { ActualizeUserFactory } from "../modules/User/ActualizeUser/ActualizeUserFactory";
 import { CreateUserFactory } from "../modules/User/CreateUser/CreateUserFactory";
 import { IndexUserFactory } from "../modules/User/IndexUser/IndexUserFactory";
 import { LoginFactory } from "../modules/User/Login/LoginFactory";

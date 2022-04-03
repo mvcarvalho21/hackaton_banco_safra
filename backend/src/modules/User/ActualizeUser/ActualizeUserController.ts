@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ActualizeUserService } from "./actualizeUserService";
+import { ActualizeUserService } from "./ActualizeUserService";
 
 class ActualizeUserController {
      
