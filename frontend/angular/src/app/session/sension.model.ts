@@ -12,7 +12,6 @@ export interface ReturnCreateUser {
 }
 
 export interface RequestSimulacao {
-  id: string;
   amount_installment: number;
   amount_of_rest_installment: number;
   actual_value_installment: number;
@@ -28,12 +27,4 @@ export interface ReturnSimulacao {
   saved_value: number,
   new_total_value: number,
   id_offer: string
-}
-
-export interface RequestSimulacaoResultado {
-
-}
-
-export interface ReturnSimulacaoResultado {
-
 }
