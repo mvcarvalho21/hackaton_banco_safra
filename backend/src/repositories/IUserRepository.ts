@@ -1,5 +1,6 @@
 import { User } from "../entities/User";
 import { ICreateUserRequest } from "../modules/User/CreateUser/CreateUserService";
+import { IIndexUserRequest } from "../modules/User/IndexUser/IndexUserService";
 
 export interface IUserRepository {
     encryptedPassword(password: string): Promise<string>
@@ -10,4 +11,5 @@ export interface IUserRepository {
     decode(token: string): Promise<string>
     decodeTokenReturnUserId(req: string): Promise<string>
     createUser(data: ICreateUserRequest): Promise<User>
+    search(data: IIndexUserRequest): Promise<User[]>
 }

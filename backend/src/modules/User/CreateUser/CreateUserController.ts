@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { CreateUserService } from "./CreateUserService";
+
 class CreateUserController {
+    
     constructor(
         private CreateUser: CreateUserService
     ) { }

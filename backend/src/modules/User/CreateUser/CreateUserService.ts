@@ -1,6 +1,5 @@
 require('dotenv').config
 
-import { UserLogged } from "../../../entities/UserLogged";
 import { IUserRepository } from "../../../repositories/IUserRepository";
 
 
@@ -22,7 +21,7 @@ class CreateUserService {
     async execute(data: ICreateUserRequest) {
 
         if (!data.cpf) {
-            throw new Error('Usuário ou senha inválidos')
+            throw new Error('Cpf inválido')
         }
 
         const space_between_cpf = this.userRepository.hasWhiteSpace(data.cpf);
@@ -37,11 +36,17 @@ class CreateUserService {
             return user.id;
         }
 
-        const createdUser = await this.userRepository.createUser(data);
+        let password_encrypted = null;
+        if (data.password) {
+            password_encrypted = await this.userRepository.encryptedPassword(data.password)
+            const createdUser = await this.userRepository.createUser({ cpf: data.cpf, email: data.email, phone: data.phone, last_name: data.last_name, name: data.name, password: password_encrypted });
 
-        console.log(createdUser)
-    
-        return createdUser.id;
+            return createdUser.id;
+        } else {
+            const createdUser = await this.userRepository.createUser(data);
+
+            return createdUser.id;
+        }
     }
 
 }
