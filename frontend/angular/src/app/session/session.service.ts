@@ -9,16 +9,16 @@ import {RequestCreateUser, RequestSimulacao, ReturnCreateUser, ReturnSimulacao} 
 })
 export class SessionService {
 
-  private url = `${environment.apiUrl}/user`;
+  private url = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) { }
 
   cadastraUsuario(request: RequestCreateUser): Observable<ReturnCreateUser> {
-    return this.http.post<ReturnCreateUser>(this.url, request);
+    return this.http.post<ReturnCreateUser>(`${this.url}/user`, request);
   }
 
-  cadastraSolicitacao(request: RequestSimulacao): Observable<ReturnSimulacao> {
-    return this.http.post<ReturnSimulacao>(this.url, request);
+  cadastraSolicitacao(id: string, request: RequestSimulacao): Observable<ReturnSimulacao> {
+    return this.http.post<ReturnSimulacao>(`${this.url}/offer/${id}`, request);
   }
 
 
